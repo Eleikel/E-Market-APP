@@ -1,0 +1,104 @@
+﻿@using Emarket.Core.Application.ViewModels.Advertisements
+@using Emarket.Core.Application.ViewModels.Categories
+
+@*
+    @using Microsoft.AspNetCore.Http;
+    @using Emarket.Core.Application.Helpers;
+    @using Emarket.Core.Application.ViewModels.Users
+    @inject IHttpContextAccessor httpContext;
+    @{
+    UserViewModel User = httpContext.HttpContext.Session.Get<UserViewModel>("user");
+    }*@
+
+
+@model SaveAdvertisementViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container-fluid w-100">
+
+    <div class="col">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-success">Volver a Seccion Anuncios</a>
+    </div>
+
+    <div class="col mt-3">
+        <h5> Anuncios > <span class="text-muted">@Model.Name</span> </h5>
+    </div>
+
+    <div class="row mt-5">
+
+        <div class="col">
+
+            <div id="carouselDarkVariant" class="carousel slide carousel-dark" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="@Model.ImageUrl" class="d-block w-100 opacity-75 image-size" alt="...">
+                    </div>
+
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-mdb-target="#carouselDarkVariant" data-mdb-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-mdb-target="#carouselDarkVariant" data-mdb-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="col-4 mt-5">
+            <div class="container mt-5">
+
+                <h1 class="fw-bold">RD$ @Model.Price</h1>
+                <p class="fs-1">@Model.Name</p>
+                <p class="fs-3">Categoria: @Model.Category.Name</p>
+
+                <div class="card shadow-sm">
+
+                    <div class="card-body">
+                        <h4 class="card-title">Perfil del Anunciante</h4>
+                        <p class="fs-4 card-text">Publicado Por: @Model.PublishedBy</p>
+                        <p class="fs-4 card-text">Email: @Model.Email</p>
+                        <p class="fs-4 card-text">Contacto: @Model.Phone</p>
+                        <small class="text-muted">Publicado el @Model.Created</small>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+        <div class="row">
+
+            <div class="col-8">
+
+                <div class="card mb-4 box-shadow">
+                    <div class="card-body">
+
+                        <p class="card-text"><span class="fw-bold">Descripcion:</span>  @Model.Description</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+

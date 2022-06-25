@@ -1,0 +1,37 @@
+﻿@using Emarket.Core.Application.ViewModels.Users;
+@model LoginViewModel
+
+
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+                <div class="card-body">
+                    @Html.ValidationSummary(false, "",new {@class = "text-danger"})
+                    <form method="post" asp-controller="User" asp-action="Index">
+
+                        <div class="mb-3">
+                            <label asp-for="Username" class="form-label">Contraseña: </label>
+                            <input asp-for="Username" class="form-control">
+                            @*                            <span asp-validation-for="Username" class="text-danger"></span>
+                            *@
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label">Contraseña: </label>
+                            <input asp-for="Password" class="form-control">
+                            @*<span asp-validation-for="Password" class="text-danger"></span>*@
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Iniciar Sesion</button>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

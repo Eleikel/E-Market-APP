@@ -1,0 +1,51 @@
+﻿
+@using Emarket.Core.Application.ViewModels.Categories
+@model SaveCategoryViewModel
+
+@{
+    bool editMode = Model.Id == 0 ? false : true;
+    ViewData["Title"] = "Save Category";
+}
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+                <div class="card-header bg-dark text-light">
+                    <h4>@(editMode ? $"Editar categoria: {Model.Name}" : "Crear categoria")</h4>
+                </div>
+                <div class="card-body">
+
+                    <form method="post" asp-controller="Category" asp-action="@(editMode ? "Edit":"Create")">
+
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label">Nombre de Categoria: </label>
+                            <input type="text" asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label">Descripcion de la categoria: </label>
+                            <textarea asp-for="Description" class="form-control"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                            @Html.ValidationSummary(true) 
+
+                        </div>
+                   
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <a asp-controller="Category" asp-action="Index" class="btn btn-warning">Volver atras</a>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+

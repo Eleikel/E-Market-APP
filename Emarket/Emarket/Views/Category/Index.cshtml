@@ -1,0 +1,56 @@
+﻿@using Emarket.Core.Application.ViewModels.Categories;
+@model List<CategoryViewModel>
+
+
+<div class="container-fluid">
+
+    <div class="row mb-3">
+        <div class="col-3 offset-9">
+            <a asp-controller="Category" asp-action="Create" class="btn btn-outline-success">Crear nueva categoria</a>
+        </div>
+    </div>
+
+    <div class="row">
+
+        @if (Model.Count() > 0)
+        {
+            @foreach (CategoryViewModel itemCategory in Model)
+            {
+                <div class="col-4">
+                    <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+
+                        <div class="card-body">
+                            <h4 class="card-title">@itemCategory.Name</h4>
+                            <p class="card-text">@itemCategory.Description</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a asp-controller="Category" asp-action="Edit" asp-route-id="@itemCategory.Id" class="btn btn-sm btn-outline-info">Editar</a>
+                                    <a asp-controller="Category" asp-action="Delete" asp-route-id="@itemCategory.Id" class="btn btn-sm btn-outline-danger">Borrar</a>
+                                </div>
+
+                                                                <div class="row">
+
+                                <small class="fw-bold fs-6">
+                                    Cantidad de Anuncios:
+                                    <span class="badge bg-primary rounded-pill">@itemCategory.AdvertisementsQuantity</span>
+                                </small>
+                                <small class="fw-bold fs-6">
+                                    Cantidad de Usuarios:
+                                    <span class="badge bg-primary rounded-pill">@itemCategory.UsersQuantity</span>
+                                </small>
+                                                            </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <h2>No hay Categorias</h2>
+        }
+
+    </div>
+
+</div>
