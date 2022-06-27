@@ -25,6 +25,7 @@
                     }
                     else
                     {
+
                 <form method="post" asp-controller="Advertisement" asp-action="@(editMode ? "Edit":"Create")" enctype = "multipart/form-data">
 
                     <div class="mb-3">
@@ -48,11 +49,11 @@
                         <label asp-for="File" class="form-label">Seleccione un archivo:</label>
                         @if (editMode)
                         {
-                            <input asp-for="File" class="form-control" />
+                            <input asp-for="File" class="form-control" multiple accept="image/*" />
                         }
                         else
                         {
-                            <input required asp-for="File" class="form-control" />
+                            <input required asp-for="File" class="form-control" multiple accept="image/*"/>
                         }
 
                         <span asp-validation-for="File" class="text-danger"></span>

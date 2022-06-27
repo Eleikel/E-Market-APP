@@ -83,3 +83,29 @@ body {
     width: 100px;
     height: 700px;
 }
+
+
+.boton {
+    background-color: #732ff9;
+    color: #ffffff;
+}
+
+.title {
+    color: #732ff9;
+}
+
+.image {
+    width: 380px;
+    height: 250px;
+}
+
+.imageSize {
+    width: 550px;
+    height: 680px;
+}
+
+.borderColor {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #732ff9;
+}

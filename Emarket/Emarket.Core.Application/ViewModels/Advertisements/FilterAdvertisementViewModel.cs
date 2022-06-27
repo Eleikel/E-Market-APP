@@ -10,6 +10,8 @@ namespace Emarket.Core.Application.ViewModels.Advertisements
     {
         public int? CategoryId { get; set; }
 
+        public List <int> Categories { get; set; }
+
         public int? Id { get; set; }
 
     }

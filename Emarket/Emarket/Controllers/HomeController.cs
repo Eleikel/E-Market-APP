@@ -38,7 +38,7 @@ namespace Emarket.Controllers
             }
 
             ViewBag.Categories = await _categoryService.GetAllViewModel();
-            ViewBag.Names = await _advertisementService.GetAllViewModel();
+            ViewBag.Names = await _advertisementService.GetAllViewModelWithFilter(vm);
 
             return View(await _advertisementService.GetAllViewModelWithFilter(vm));
         }
@@ -52,12 +52,8 @@ namespace Emarket.Controllers
                 return RedirectToRoute(new { controller = "User", action = "Index" });
             }
 
-            //SaveAdvertisementViewModel vm = await _advertisementService.GetByIdSaveViewModel(id);
-            //vm.Categories = await _categoryService.GetAllViewModel();
-            //vm.Users = await _userService.GetAllViewModel();
-            //return View("Detail", vm);
-            ViewBag.Categories = await _categoryService.GetAllViewModel();
 
+            ViewBag.Categories = await _categoryService.GetAllViewModel();
 
             return View("Detail", await _advertisementService.GetByIdSaveViewModel(id));
         }

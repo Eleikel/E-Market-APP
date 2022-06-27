@@ -16,11 +16,16 @@ namespace Emarket.Core.Application.Services
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly IAdvertisementRepository _advertisementRepository;
+
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserViewModel userViewModel;
-        public CategoryService(ICategoryRepository categoryRepository, IHttpContextAccessor httpContextAccessor)
+        public CategoryService(ICategoryRepository categoryRepository, IUserRepository userRepository, IAdvertisementRepository advertisementRepository, IHttpContextAccessor httpContextAccessor)
         {
             _categoryRepository = categoryRepository;
+            _userRepository = userRepository;
+            _advertisementRepository = advertisementRepository;
             _httpContextAccessor = httpContextAccessor;
             userViewModel = _httpContextAccessor.HttpContext.Session.Get<UserViewModel>("user"); //Get the current User of the session
         }
@@ -76,8 +81,42 @@ namespace Emarket.Core.Application.Services
 
         public async Task<List<CategoryViewModel>> GetAllViewModel()
         {
-            //"Advertisement"
+            //Process to get the Quantity of distincts Users who are the Owners of the advertisement and using a certain category
             var categoryList = await _categoryRepository.GetAllWithIncludeAsync(new List<string> { "Advertisements" });
+            var userList = await _userRepository.GetAllWithIncludeAsync(new List<string> { "Advertisements" });
+            var advertisementList = await _advertisementRepository.GetAllWithIncludeAsync(new List<string> { "Category" });
+
+            var IdCategories = categoryList.Select(cat => cat.Id).ToList();
+            var CategoriesDictionary = new Dictionary<int, int>();
+
+            foreach (var idCategory in IdCategories)
+            {
+                CategoriesDictionary.Add(idCategory, 0);
+            }
+
+            var IdUsers = userList.Select(user => user.Id).ToList();
+
+            foreach (var IdUser in IdUsers)
+            {
+
+                List<int> CategoriesIdUsed = new();
+
+                var CategoriesIdFromUser = advertisementList.Where(advertisement => advertisement.UserId == IdUser)
+                                                        .Select(advertisement => advertisement.CategoryId).ToList();
+
+                foreach (var item in CategoriesIdFromUser)
+                {
+                    var Found = IdCategories.Exists(a => a == item);
+
+                    if (Found && !CategoriesIdUsed.Exists(a => a == item))
+                    {
+                        CategoriesIdUsed.Add(item);
+                        CategoriesDictionary[item] = CategoriesDictionary[item] + 1;
+                    }                  
+                }
+            }
+            //
+
 
             return categoryList.Select(category => new CategoryViewModel
             {
@@ -85,12 +124,7 @@ namespace Emarket.Core.Application.Services
                 Name = category.Name,
                 Description = category.Description,
                 AdvertisementsQuantity = category.Advertisements.Count(),
-                UsersQuantity = category.Advertisements.Where(advertisement => advertisement.Id == userViewModel.Id).Select(advertisement => new UserViewModel
-                {
-                    Id = userViewModel.Id
-                }).Count()
-
-                //AdvertisementsQuantity = = category.Users.Where(advertisement => advertisement.UserId == userViewModel.Id).Count()
+                UsersQuantity = CategoriesDictionary[category.Id]
 
             }).ToList();
         }

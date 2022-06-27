@@ -42,6 +42,15 @@ namespace Emarket.Infrastructure.Persistence.Migrations
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageUrl2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl4")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("datetime2");
 

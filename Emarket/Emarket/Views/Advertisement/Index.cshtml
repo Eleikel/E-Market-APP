@@ -6,9 +6,17 @@
 
 <div class="container-fluid">
 
+
+        <div class="row">
+
+        <div class="col">
+            <h2 class="titulo text-center mb-5 display-2 title"> MIS ANUNCIOS</h2>
+        </div>
+    </div>
+
     <div class="row mb-3">
         <div class="col-3 offset-9">
-            <a asp-controller="Advertisement" asp-action="Create" class="btn btn-outline-success">Crear nuevo Anuncio</a>
+            <a asp-controller="Advertisement" asp-action="Create" class="btn boton fw-bold">Crear nuevo Anuncio</a>
         </div>
     </div>
 
@@ -25,17 +33,18 @@
             {
                 <div class="col-4">
                     <div class="card shadow-lg p-3 mb-5 bg-white rounded">
-                        <img class="bd-placeholder-img card-img-top img-product-size" src="@item.ImageUrl" />
+                        <img class="image bd-placeholder-img card-img-top img-product-size" src="@item.ImageUrl" />
 
                         <div class="card-body">
-                            <h4 class="card-title">@item.Name - @item.CategoryName</h4>
-                            <p class="card-text">@item.Description</p>
+                            <h2 class="card-title">@item.Name </h2>
+                            <h3 class="text-muted font-weight-light mb-2">Category: @item.CategoryName</h3>
+                            <h5 class="card-text">Descripcion:  @item.Description</h5>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a asp-controller="Advertisement" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info">Editar</a>
-                                    <a asp-controller="Advertisement" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Borrar</a>
+                                    <a asp-controller="Advertisement" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Editar</a>
+                                    <a asp-controller="Advertisement" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Borrar</a>
                                 </div>
-                                <small class="fw-bold fs-6">$@item.Price</small>
+                                <small class="fw-bold fs-5">$@item.Price</small>
                             </div>
                         </div>
                     </div>

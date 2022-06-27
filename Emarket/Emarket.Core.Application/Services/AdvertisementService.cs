@@ -17,12 +17,14 @@ namespace Emarket.Core.Application.Services
     public class AdvertisementService : IAdvertisementService
     {
         private readonly IAdvertisementRepository _advertisementRepository;
+        private readonly ICategoryRepository _categoryRepository;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserViewModel userViewModel;
 
-        public AdvertisementService(IAdvertisementRepository advertisementRepository, IHttpContextAccessor httpContextAccessor)
+        public AdvertisementService(IAdvertisementRepository advertisementRepository, IHttpContextAccessor httpContextAccessor, ICategoryRepository categoryRepository)
         {
             _advertisementRepository = advertisementRepository;
+            _categoryRepository = categoryRepository;
             _httpContextAccessor = httpContextAccessor;
             userViewModel = _httpContextAccessor.HttpContext.Session.Get<UserViewModel>("user"); //Get the current User of the session
         }
@@ -35,9 +37,12 @@ namespace Emarket.Core.Application.Services
             advertisement.Name = vm.Name;
             advertisement.Description = vm.Description;
             advertisement.ImageUrl = vm.ImageUrl;
+            advertisement.ImageUrl2 = vm.ImageUrl2;
+            advertisement.ImageUrl3 = vm.ImageUrl3;
+            advertisement.ImageUrl4 = vm.ImageUrl4;
             advertisement.Price = vm.Price;
             advertisement.CategoryId = vm.CategoryId;
-            advertisement.UserId = vm.UserId;//
+            advertisement.UserId = vm.UserId;
 
             await _advertisementRepository.UpdateAsync(advertisement);
         }
@@ -49,9 +54,12 @@ namespace Emarket.Core.Application.Services
             advertisement.Name = vm.Name;
             advertisement.Price = vm.Price;
             advertisement.ImageUrl = vm.ImageUrl;
+            advertisement.ImageUrl2 = vm.ImageUrl2;
+            advertisement.ImageUrl3 = vm.ImageUrl3;
+            advertisement.ImageUrl4 = vm.ImageUrl4;
             advertisement.Description = vm.Description;
             advertisement.CategoryId = vm.CategoryId;
-            advertisement.UserId = userViewModel.Id;//
+            advertisement.UserId = userViewModel.Id;
 
             advertisement = await _advertisementRepository.AddAsync(advertisement);
 
@@ -61,10 +69,12 @@ namespace Emarket.Core.Application.Services
             advertisementVm.Name = advertisement.Name;
             advertisementVm.Price = advertisement.Price;
             advertisementVm.ImageUrl = advertisement.ImageUrl;
+            advertisementVm.ImageUrl2 = advertisement.ImageUrl2;
+            advertisementVm.ImageUrl3 = advertisement.ImageUrl3;
+            advertisementVm.ImageUrl4 = advertisement.ImageUrl4;
             advertisementVm.Description = advertisement.Description;
             advertisementVm.CategoryId = advertisement.CategoryId;
-            //advertisementVm.CategoryName = advertisement.Category.Name;
-            advertisementVm.UserId = advertisement.UserId;//
+            advertisementVm.UserId = advertisement.UserId;
 
 
             return advertisementVm;       
@@ -85,16 +95,15 @@ namespace Emarket.Core.Application.Services
             vm.Name = advertisement.Name;
             vm.Price = advertisement.Price;
             vm.ImageUrl = advertisement.ImageUrl;
+            vm.ImageUrl2 = advertisement.ImageUrl2;
+            vm.ImageUrl3 = advertisement.ImageUrl3;
+            vm.ImageUrl4 = advertisement.ImageUrl4;
             vm.Description = advertisement.Description;
-            vm.CategoryId = advertisement.CategoryId;//
-            //vm.CategoryName = advertisement.Category.Name;
+            vm.CategoryId = advertisement.CategoryId;
             vm.Created = advertisement.Created;
-            vm.PublishedBy = userViewModel.Username; //Modificar esta a advertisement.User.Name
-            vm.Email = userViewModel.Email;
-            vm.Phone = userViewModel.Phone;
-            //vm.UserId = advertisement.UserId;
+            vm.UserId = advertisement.UserId;
             vm.Category = advertisement.Category; //Acceder al name
-            //vm.User = advertisement.User;
+            vm.User = advertisement.User;
 
             return vm;
         }
@@ -112,19 +121,18 @@ namespace Emarket.Core.Application.Services
                 Price = advertisement.Price,
                 CategoryId = advertisement.CategoryId,
                 CategoryName = advertisement.Category.Name,
-                //last;
-                UserId = userViewModel.Id
                
             }).ToList();
         }
-
 
         //GET ALL With Filter
         public async Task<List<AdvertisementViewModel>> GetAllViewModelWithFilter(FilterAdvertisementViewModel filters)
         {
             var advertisementList = await _advertisementRepository.GetAllAsync();
 
-            var listViewModels = advertisementList.Select(advertisement => new AdvertisementViewModel
+
+            //This us
+            var listViewModels = advertisementList.Where(advertisement => advertisement.UserId != userViewModel.Id).Select(advertisement => new AdvertisementViewModel
             {
                 Id = advertisement.Id,
                 Name = advertisement.Name,

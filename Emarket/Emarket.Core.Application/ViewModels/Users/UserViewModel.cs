@@ -16,7 +16,5 @@ namespace Emarket.Core.Application.ViewModels.Users
         public string Email { get; set; }
         public string Phone { get; set; }
 
-        // Quantity of Advertisements by category
-        //public int AdvertisementsQuantity { get; set; }
     }
 }

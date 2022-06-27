@@ -124,8 +124,6 @@ namespace Emarket.Core.Application.Services
                 Phone = user.Phone,
                 Username = user.Username,
                 Password = user.Password
-
-                //AdvertisementsQuantity = category.Products.Count()
             }).ToList();
         }
 

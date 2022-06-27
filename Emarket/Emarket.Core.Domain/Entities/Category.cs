@@ -14,7 +14,6 @@ namespace Emarket.Core.Domain.Entities
 
         //Navegation property
         public ICollection<Advertisement> Advertisements { get; set; }
-        //public ICollection<User> Users { get; set; }
 
     }
 }

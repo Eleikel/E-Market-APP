@@ -17,9 +17,5 @@ namespace Emarket.Core.Domain.Entities
         public string Phone { get; set; }
 
         public ICollection<Advertisement> Advertisements { get; set; }
-
-        //public int CategoryIds { get; set; }
-        ////Navegation Property
-        //public Category Category { get; set; }
     }
 }

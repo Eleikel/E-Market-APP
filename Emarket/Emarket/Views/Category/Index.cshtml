@@ -4,9 +4,16 @@
 
 <div class="container-fluid">
 
+    <div class="row">
+
+        <div class="col">
+            <h2 class="titulo text-center mb-5 display-2 title"> Lista de Categorias</h2>
+        </div>
+    </div>
+
     <div class="row mb-3">
         <div class="col-3 offset-9">
-            <a asp-controller="Category" asp-action="Create" class="btn btn-outline-success">Crear nueva categoria</a>
+            <a asp-controller="Category" asp-action="Create" class="btn boton fw-bold">Crear nueva categoria</a>
         </div>
     </div>
 
@@ -24,21 +31,21 @@
                             <p class="card-text">@itemCategory.Description</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a asp-controller="Category" asp-action="Edit" asp-route-id="@itemCategory.Id" class="btn btn-sm btn-outline-info">Editar</a>
+                                    <a asp-controller="Category" asp-action="Edit" asp-route-id="@itemCategory.Id" class="btn btn-sm btn-outline-success">Editar</a>
                                     <a asp-controller="Category" asp-action="Delete" asp-route-id="@itemCategory.Id" class="btn btn-sm btn-outline-danger">Borrar</a>
                                 </div>
 
-                                                                <div class="row">
+                                <div class="row mr-5">
 
-                                <small class="fw-bold fs-6">
-                                    Cantidad de Anuncios:
-                                    <span class="badge bg-primary rounded-pill">@itemCategory.AdvertisementsQuantity</span>
-                                </small>
-                                <small class="fw-bold fs-6">
-                                    Cantidad de Usuarios:
-                                    <span class="badge bg-primary rounded-pill">@itemCategory.UsersQuantity</span>
-                                </small>
-                                                            </div>
+                                    <small class="fw-bold fs-6">
+                                        Cantidad de Anuncios:
+                                        <span class="badge bg-primary rounded-pill">@itemCategory.AdvertisementsQuantity</span>
+                                    </small>
+                                    <small class="fw-bold fs-6">
+                                        Cantidad de Usuarios:
+                                        <span class="badge bg-primary rounded-pill">@itemCategory.UsersQuantity</span>
+                                    </small>
+                                </div>
 
                             </div>
                         </div>

@@ -20,7 +20,7 @@
 <div class="container-fluid w-100">
 
     <div class="col">
-        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-success">Volver a Seccion Anuncios</a>
+        <a asp-controller="Home" asp-action="Index" class="btn boton">Volver a Seccion Anuncios</a>
     </div>
 
     <div class="col mt-3">
@@ -28,58 +28,98 @@
     </div>
 
     <div class="row mt-5">
-
         <div class="col">
 
-            <div id="carouselDarkVariant" class="carousel slide carousel-dark" data-bs-ride="carousel">
+
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+
+                    @if (Model.ImageUrl2 != null)
+                    {
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    }
+
+                    @if (Model.ImageUrl3 != null)
+                    {
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    }
+
+                    @if (Model.ImageUrl4 != null)
+                    {
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    }
+                </div>
+
+
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="@Model.ImageUrl" class="d-block w-100 opacity-75 image-size" alt="...">
+                        <img src="@Model.ImageUrl" class="d-block w-100 imageSize" alt="...">
                     </div>
+
+                    @if (Model.ImageUrl2 != null)
+                    {
+                        <div class="carousel-item">
+                            <img src="@Model.ImageUrl2" class="d-block w-100 imageSize" alt="...">
+                        </div>
+                    }
+
+                    @if (Model.ImageUrl3 != null)
+                    {
+                        <div class="carousel-item">
+                            <img src="@Model.ImageUrl3" class="d-block w-100 imageSize" alt="...">
+                        </div>
+                    }
+
+                    @if (Model.ImageUrl4 != null)
+                    {
+                        <div class="carousel-item">
+                            <img src="@Model.ImageUrl4" class="d-block w-100 imageSize" alt="...">
+                        </div>
+                    }
 
                 </div>
 
-                <button class="carousel-control-prev" type="button" data-mdb-target="#carouselDarkVariant" data-mdb-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-mdb-target="#carouselDarkVariant" data-mdb-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+
+                @if (Model.ImageUrl2 != null)
+                {
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                }
+
             </div>
+
         </div>
-
-
-
 
 
         <div class="col-4 mt-5">
             <div class="container mt-5">
-
-                <h1 class="fw-bold">RD$ @Model.Price</h1>
-                <p class="fs-1">@Model.Name</p>
-                <p class="fs-3">Categoria: @Model.Category.Name</p>
-
                 <div class="card shadow-sm">
 
                     <div class="card-body">
-                        <h4 class="card-title">Perfil del Anunciante</h4>
-                        <p class="fs-4 card-text">Publicado Por: @Model.PublishedBy</p>
-                        <p class="fs-4 card-text">Email: @Model.Email</p>
-                        <p class="fs-4 card-text">Contacto: @Model.Phone</p>
+
+                        <h2 class="fw-bold">RD$ @Model.Price</h2>
+                        <p class="fs-1 text-muted">@Model.Name</p>
+                        <p class="fs-5"><span class="text-success">Categoria: </span> @Model.Category.Name</p>
+                        <h3 class="text-muted font-weight-light mb-3 mt-4">Perfil del Anunciante</h3>
+                        <p class="fs-5 card-text"><span class="text-primary">Publicado Por: </span>  @Model.User.Name</p>
+                        <p class="fs-5 card-text"><span class="text-primary">Email: </span> @Model.User.Email</p>
+                        <p class="fs-5 card-text"><span class="text-primary">Telefono: </span> @Model.User.Phone</p>
                         <small class="text-muted">Publicado el @Model.Created</small>
 
                     </div>
                 </div>
-
-
             </div>
-
-
         </div>
-
-
 
 
 
@@ -90,7 +130,7 @@
                 <div class="card mb-4 box-shadow">
                     <div class="card-body">
 
-                        <p class="card-text"><span class="fw-bold">Descripcion:</span>  @Model.Description</p>
+                        <p class="card-text"><span class="fs-4 fw-bold">Descripcion:</span>  @Model.Description</p>
 
                     </div>
 

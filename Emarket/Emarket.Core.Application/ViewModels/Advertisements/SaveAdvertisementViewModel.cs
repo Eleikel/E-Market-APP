@@ -26,6 +26,15 @@ namespace Emarket.Core.Application.ViewModels.Advertisements
         [DataType(DataType.Text)]
         public string ImageUrl { get; set; }
 
+        [DataType(DataType.Text)]
+        public string ImageUrl2 { get; set; }
+
+        [DataType(DataType.Text)]
+        public string ImageUrl3 { get; set; }
+
+        [DataType(DataType.Text)]
+        public string ImageUrl4 { get; set; }
+
         [Required(ErrorMessage = "Debe ingresar el precio del Anuncio")]
         [DataType(DataType.Currency)]
         public double Price { get; set; }
@@ -36,24 +45,16 @@ namespace Emarket.Core.Application.ViewModels.Advertisements
 
         public List<CategoryViewModel> Categories { get; set; }
 
-        //
         public Category Category { get; set; }
         public User User { get; set; }
-//
-
-        public List<UserViewModel> Users { get; set; }
-
 
 
         [DataType(DataType.Upload)]
-        public IFormFile File { get; set; }
+        public List<IFormFile> File { get; set; }
+
         public int UserId { get; set; }
 
-
-        public string CategoryName { get; set;}
         public DateTime Created { get; set; }   
-        public string PublishedBy { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
+
     }
 }

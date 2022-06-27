@@ -4,6 +4,7 @@ using Emarket.Middleware;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -68,7 +69,25 @@ namespace Emarket.Controllers
 
             if (advertisementVm.Id != 0 && advertisementVm != null)
             {
-                advertisementVm.ImageUrl = UploadFile(vm.File, advertisementVm.Id);
+                advertisementVm.ImageUrl = UploadFile(vm.File[0], advertisementVm.Id);
+
+
+                var length = vm.File.Count;
+
+                if (length >= 2 && vm.File[1] != null)
+                {
+                    advertisementVm.ImageUrl2 = UploadFile(vm.File[1], advertisementVm.Id);
+                }
+
+                if (length >= 3 && vm.File[2] != null)
+                {
+                    advertisementVm.ImageUrl3 = UploadFile(vm.File[2], advertisementVm.Id);
+                }
+
+                if (length >= 4 && vm.File[3] != null)
+                {
+                    advertisementVm.ImageUrl4 = UploadFile(vm.File[3], advertisementVm.Id);
+                }
 
                 await _advertisementService.Update(advertisementVm);
             }
@@ -105,8 +124,33 @@ namespace Emarket.Controllers
                 return View("SaveAdvertisement", vm);
             }
 
-            SaveAdvertisementViewModel productVm = await _advertisementService.GetByIdSaveViewModel(vm.Id);
-            vm.ImageUrl = UploadFile(vm.File, vm.Id, true, productVm.ImageUrl);
+            SaveAdvertisementViewModel advertisementVm = await _advertisementService.GetByIdSaveViewModel(vm.Id);
+
+            var length = vm.File != null ? vm.File.Count : 0;
+
+            List<IFormFile> Images = new List<IFormFile>(4);
+
+            int LimitFilesNumber = 4; //How many Files i want to upload
+
+            for (int i = 0; i < LimitFilesNumber; i++)
+            {
+                if (length >= i + 1 && vm.File[i] != null)
+                {
+                    Images.Add(vm.File[i]);
+                }
+                else
+                {
+                    Images.Add(null);
+                }
+            }
+
+            vm.ImageUrl = UploadFile(Images[0], vm.Id, true, advertisementVm.ImageUrl);
+            vm.ImageUrl2 = UploadFile(Images[1], vm.Id, true, advertisementVm.ImageUrl2);
+            vm.ImageUrl3 = UploadFile(Images[2], vm.Id, true, advertisementVm.ImageUrl3);
+            vm.ImageUrl4 = UploadFile(Images[3], vm.Id, true, advertisementVm.ImageUrl4);
+
+            vm.UserId = advertisementVm.UserId;
+
             await _advertisementService.Update(vm);
 
 
@@ -200,7 +244,7 @@ namespace Emarket.Controllers
 
 
             //Borrar la Imagen Antigua cuando editamos
-            if (isEditMode)
+            if (isEditMode && imageUrl != "" && imageUrl != null)
             {
                 string[] oldImagePart = imageUrl.Split("/");
                 string oldImageName = oldImagePart[^1];   // '^1' = Ultima posicion

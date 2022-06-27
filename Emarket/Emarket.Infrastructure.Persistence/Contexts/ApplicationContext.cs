@@ -81,14 +81,6 @@ namespace Emarket.Infrastructure.Persistence.Contexts
                 .WithOne(advertisement => advertisement.Category)
                 .HasForeignKey(advertisement => advertisement.CategoryId)
                 .OnDelete(DeleteBehavior.Cascade);
-
-
-//Prueba
-    //        modelBuilder.Entity<Category>()
-    //.HasMany<User>(category => category.Users)
-    //.WithOne(advertisement => advertisement.Category)
-    //.HasForeignKey(advertisement => advertisement.CategoryIds)
-    //.OnDelete(DeleteBehavior.NoAction);
             #endregion
 
 

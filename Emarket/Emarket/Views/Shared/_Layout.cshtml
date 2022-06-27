@@ -14,13 +14,16 @@
     <title>@ViewData["Title"] - Emarket</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
 </head>
 <body>
     <header>
         <nav class="navbar-color navbar navbar-expand-sm navbar-toggleable-sm  border-bottom box-shadow mb-3">
             <div class="container">
 
-                <a class="navbar-brand text-light" asp-area="" asp-controller="@(User != null ? "Home" : "User")" asp-action="Index">Emarket</a>
+                <a class="navbar-brand text-light" asp-area="" asp-controller="@(User != null ? "Home" : "User")" asp-action="Index">Lista de Anuncios</a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -35,13 +38,13 @@
                         @if (User != null)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-controller="Advertisement" asp-action="Index">Advertisement</a>
+                                <a class="nav-link text-light" asp-controller="Advertisement" asp-action="Index">Mis Anuncios</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-controller="Category" asp-action="Index">Category</a>
+                                <a class="nav-link text-light" asp-controller="Category" asp-action="Index">Categorias</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-controller="User" asp-action="LogOut">Cerrar Session</a>
+                                <a class="nav-link text-light fw-bold" asp-controller="User" asp-action="LogOut">Cerrar Session</a>
                             </li>
                         }
                         else
@@ -66,9 +69,7 @@
             &copy; 2022 - Emarket - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
