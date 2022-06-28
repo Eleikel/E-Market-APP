@@ -1,3 +1,4 @@
+
 # E-Market
 
 ------------
@@ -6,9 +7,11 @@ The E-Market project was built with ASP.NET Core MVC. E-Market has 2 maintenance
 
 
 
-###Built with :hammer:
+Built with 
 
 ------------
+
+
 
 - C#
 - ASP.NET CORE
@@ -16,7 +19,7 @@ The E-Market project was built with ASP.NET Core MVC. E-Market has 2 maintenance
 - Entity Framework Core
 - SQL Server
 
-## Installation
+## Installation :clipboard:
 ------------
 
 1. Clone this repository in your local machine:
@@ -56,5 +59,3 @@ The E-Market project was built with ASP.NET Core MVC. E-Market has 2 maintenance
 #### Presentation Layer
 - Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation
 - Microsoft.EntityFrameworkCore.Tools
-
-
